@@ -9,27 +9,27 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.workproject.simplewebapp.entity.AuthorEntity;
+import com.workproject.simplewebapp.entity.Author;
 
 @javax.enterprise.context.RequestScoped
-public class AuthorEntityProducer {
+public class AuthorProducer {
 
 	@Inject
-	private AuthorEntityDAO authorEntityDao;
-	private List<AuthorEntity> authorEntities;
+	private AuthorDAO authorEntityDao;
+	private List<Author> authors;
 
 	@PostConstruct
 	public void retrieveAllAuthorEntities(){
-		authorEntities = authorEntityDao.findAll();
+		authors = authorEntityDao.findAll();
 	}
 	
 	@Produces
 	@Named
-	public List<AuthorEntity> getAuthorEntities(){
-		return authorEntities;
+	public List<Author> getAuthorEntities(){
+		return authors;
 	}
 	
-	public void onListChanged(@Observes(notifyObserver = Reception.IF_EXISTS) final AuthorEntity member){
+	public void onListChanged(@Observes(notifyObserver = Reception.IF_EXISTS) final Author member){
 		retrieveAllAuthorEntities();
 	}
 }

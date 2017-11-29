@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notes>
+	<note category="reminder">
+		<title lang="en">Leave early</title>
+		<description>Leave early tomorrow so we make it to Durban before noon</description>
+		<created>2017-11-10 12:26:48</created>
+		<author>
+			<name>Kevin</name>
+			<surname>Hart</surname>
+		</author>
+	</note>
+	<note category="minutes">
+		<title lang="en">Board meeting</title>
+		<description>Schedule follow up session</description>
+		<created>2016-08-01 09:18:34</created>
+		<author>
+			<name>Percy</name>
+			<surname>Tau</surname>
+		</author>
+	</note>
+		<note category="study">
+		<title lang="en">Learn xml</title>
+		<description>Find xml tutorials on the internet</description>
+		<created>2015-06-06 22:26:00</created>
+		<author>
+			<name>Arnold</name>
+			<surname>Schwarzenegger</surname>
+		</author>
+	</note>
+		<note category="holiday">
+		<title lang="en">Valentines</title>
+		<description>Do not forget to get Valentine's day gift</description>
+		<created>2014-02-14 06:04:02</created>
+		<author>
+			<name>Fruit</name>
+			<surname>Salad</surname>
+		</author>
+	</note>
+</notes>

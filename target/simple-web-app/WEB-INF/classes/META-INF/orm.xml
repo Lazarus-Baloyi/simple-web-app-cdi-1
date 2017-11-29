@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd">
+    <description>My First JPA XML Application</description>
+    <package>com.workproject.simplewebapp.entity</package>
+    <entity class="AuthorEntity" name="AuthorEntity">
+        <table name="authorentity"/>
+        <attributes>
+            <id name="id">
+                <generated-value strategy="IDENTITY"/>
+            </id>
+            <basic name="AuthorSurname">
+                <column name="authorsurname" length="100"/>
+            </basic>
+            <basic name="AuthorName">
+                <column name="authorname" length="100"/>
+            </basic>
+        </attributes>
+   </entity>
+   
+       <entity class="NoteEntity" name="NoteEntity">
+        <table name="note_table"/>
+
+<!--          <many-to-one name="authorentity" target-entity="AuthorEntity">
+            <primary-key-join-column name="authorentity_id" referenced-column-name="id"/>
+        </many-to-one>         -->
+        <attributes>    
+
+             <id name="id">
+				<generated-value strategy="IDENTITY"/>
+            </id>             
+            <basic name="categoryObj">
+                <column name="categoryobj" length="100"/>
+            </basic>
+            <basic name="DateCreated">
+                <column name="datecreated" length="100"/>
+            </basic>
+            <basic name="Description">
+                <column name="description" length="100"/>
+            </basic>            
+            <basic name="Title">
+                <column name="title" length="100"/>
+            </basic>            
+        </attributes>
+   </entity>
+
+</entity-mappings>

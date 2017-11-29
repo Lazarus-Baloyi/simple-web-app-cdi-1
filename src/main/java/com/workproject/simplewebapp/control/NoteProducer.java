@@ -10,31 +10,31 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.workproject.simplewebapp.entity.NoteEntity;
+import com.workproject.simplewebapp.entity.Note;
 
-public class NoteEntityProducer implements Serializable {
+public class NoteProducer implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private NoteEntityDAO noteEntityDao; 
+	private NoteDAO noteEntityDao; 
 	
-	private List<NoteEntity> noteEntities;
+	private List<Note> notes;
 	
 	@PostConstruct
 	public void retrieveAllNoteEntities(){
-		noteEntities = noteEntityDao.findAll();
+		notes = noteEntityDao.findAll();
 	}
 	
 	@Produces
 	@Named
-	public List<NoteEntity> getNoteEntities(){
-		return noteEntities;
+	public List<Note> getNoteEntities(){
+		return notes;
 	}
 	
-	public void onMemberListChanged(/*@Observes(notifyObserver = Reception.IF_EXISTS)*/ final NoteEntity member){
+	public void onMemberListChanged(/*@Observes(notifyObserver = Reception.IF_EXISTS)*/ final Note member){
 		retrieveAllNoteEntities();
 	}
 }

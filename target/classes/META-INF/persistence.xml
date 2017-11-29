@@ -5,17 +5,11 @@
 	version="2.1">
 	<persistence-unit name="primary">
 		<jta-data-source>java:jboss/datasources/notesdb</jta-data-source>
-		<class>com.workproject.simplewebapp.entity.AuthorEntity</class>
-		<class>com.workproject.simplewebapp.entity.NoteEntity</class>
+		<class>com.workproject.simplewebapp.entity.Author</class>
+		<class>com.workproject.simplewebapp.entity.Note</class>
 		<properties>
-			<property name="javax.persistence.schema-generation.database.action"
-				value="drop-and-create" />
-			<property name="javax.persistence.schema-generation-target"
-				value="scripts" />
-			<property name="javax.persistence.ddl-create-script-target"
-				value="createSeats.sql" />
-			<property name="javax.persistence.ddl-drop-script-target"
-				value="dropSeats.sql" />
+			<!-- <property name="javax.persistence.schema-generation.database.action"
+				value="drop-and-create" /> -->
 		</properties>
 	</persistence-unit>
 </persistence>

@@ -2,8 +2,7 @@ package com.workproject.simplewebapp.controller;
 
 import java.util.Arrays;
 import java.util.List;
-//import java.util.Locale.Category;
-
+import java.io.File;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
@@ -12,11 +11,15 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 
 import com.workproject.simplewebapp.control.NotesService;
-import com.workproject.simplewebapp.entity.AuthorEntity;
+import com.workproject.simplewebapp.entity.Author;
 import com.workproject.simplewebapp.entity.Category;
 //import com.workproject.simplewebapp.entity.NoteEntity;
+import com.workproject.simplewebapp.entity.Note;
 
 @Model
 public class NotesListSetupService {
@@ -28,34 +31,54 @@ public class NotesListSetupService {
 	private NotesService notesService;
 	
 	@Inject
-	private List<AuthorEntity> authorEntities;
+	private List<Author> authors;
+
+	@Inject
+	private List<Note> notes;
 	
 	@Produces
 	@Named
-	private AuthorEntity newAuthorEntity;
+	private Author newAuthor;
 	
 	@PostConstruct
-	public void initNewAuthorEntity(){
-		newAuthorEntity = new AuthorEntity();
+	public void initNewAuthor(){
+		newAuthor = new Author();
 	}
 	
+	//File file = new File("C:\\notes.xml");
+
+	
 	public String createNoteList(){
-		notesService.createNoteList(authorEntities);
+		notesService.createNoteList(authors);
 		return "Notes";
 	}
 	
-	public String restart(){
-		notesService.doCleanup();				
-		return "/index";
+	public void unmarshallXML(){
+		
+		try {
+			JAXBContext context = JAXBContext.newInstance(Author.class);
+			Unmarshaller unmarshaller = context.createUnmarshaller();
+			File file = new File("\\main\resources\notes.xml");
+			
+			newAuthor = (Author)unmarshaller.unmarshal(file);
+			notes = newAuthor.getNotes();
+			
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
+	
+	
 	
 	public void addNewNotes() throws Exception{
 		try{
-			notesService.createAuthorEntity(newAuthorEntity);
+			notesService.createAuthor(newAuthor);
 			
 			final FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Done", "Author added");
 			facesContext.addMessage(null, m);
-			initNewAuthorEntity();			
+			initNewAuthor();			
 		} catch (Exception e){
 			final String errorMessage = getRootErrorMessage(e);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Error while saving data");
@@ -81,7 +104,14 @@ public class NotesListSetupService {
 		return errorMessage;
 		}
 		
-		public List<Category> getCategories(){
+	public List<Category> getCategories(){
 			return Arrays.asList(Category.values());
-		}
+	}
+		
+	public String restart(){
+			notesService.doCleanup();				
+			return "/index";
+	}
+
+		
 }

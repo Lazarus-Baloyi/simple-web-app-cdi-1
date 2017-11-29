@@ -7,31 +7,25 @@
 	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 	<ui:define name="content">
 
-
 		<div class="jumbotron">
 			<h1>Notes List</h1>
 			
-			<p>Enter the information about Authors</p>
-		</div>
-
-                    <h:panelGroup rendered="#{authorEntities}">
-                        <em>No Seats Added.</em>
-                    </h:panelGroup>
-
-					<h:dataTable var="authorEntities" value="#{authorEntities}"
+			<p>See notes list below</p>
+			
+				<h:dataTable var="authors" value="#{author}"
 						rendered="#{not empty noteEntities}"
 						styleClass="table table-hover table-striped ">
 						<h:column>
 							<f:facet name="header">authorID</f:facet>
-                            #{authorentity.id}
+                            #{Author.id}
                         </h:column>
 						<h:column>
 							<f:facet name="header">authorName</f:facet>
-                            #{authorentity.authorname}
+                            #{Author.name}
                         </h:column>
 						<h:column>
 							<f:facet name="header">authorSurname</f:facet>
-                            #{authorentity.authorsurname}
+                            #{Author.surname}
                         </h:column>
 <!--						<h:column>
 							<f:facet name="header">Description</f:facet>
@@ -46,6 +40,9 @@
                             #{authorEntity.AuthorSurname}
                         </h:column> -->
 					</h:dataTable>
+			
+		</div>
+
 
 		<div class="row">
 			<div class="col-md-6">
@@ -112,9 +109,9 @@
 -->
 							<div class="form-group">
 
-								<h:commandButton id="Add"
+<!-- 								<h:commandButton id="Add"
 									action="#{notesListSetupService.addNewNotes}" value="Add"
-									styleClass="btn btn-primary" />
+									styleClass="btn btn-primary" /> -->
 							</div>
 							<h:messages styleClass="messages"
 								style="list-style: none; padding:0; margin:0;"
@@ -141,6 +138,7 @@
 						<em>No Notes Added.</em>
 					</h:panelGroup>
 					
+				
 				</div>
 			</div>
 		</div>

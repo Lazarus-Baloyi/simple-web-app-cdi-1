@@ -17,36 +17,35 @@ public class NotesService {
 	private Logger log;
 	
 	@Inject 
-	private Event<AuthorEntity> authorEntityEventSrc;
+	private Event<Author> authorEntityEventSrc;
 	
 	@Inject
-	private Event<NoteEntity> noteEntityEventSrc;
+	private Event<Note> noteEntityEventSrc;
 	
 	@Inject
-	private AuthorEntityDAO authorEntityDao;
+	private AuthorDAO authorDao;
 	
 	@Inject
-	private NoteEntityDAO noteEntityDao;
+	private NoteDAO noteEntityDao;
 	
-	public void createAuthorEntity(AuthorEntity authorEntity) throws Exception{
-		log.info("Creating notes");
-		authorEntityDao.persist(authorEntity);
-		authorEntityEventSrc.fire(authorEntity);
-		
+	public void createAuthor(Author author) throws Exception{
+		log.info("Creating Authors");
+		authorDao.persist(author);
+		authorEntityEventSrc.fire(author);
 	}
 	
-	public void createNoteList(List<AuthorEntity> authorEntities){
-		for(AuthorEntity author: authorEntities){
-			for(int ii=0; ii<authorEntities.size(); ii++){
-				final NoteEntity note = new NoteEntity();
-				note.setAuthorEntity(author);
+	public void createNoteList(List<Author> authors){
+		for(Author author: authors){
+			for(int ii=0; ii<authors.size(); ii++){
+				final Note note = new Note();
+				note.setAuthor(author);
 				noteEntityDao.persist(note);
 			}
 		}
 	}
 	
 	public void updateNoteDescription(long noteID, String description){
-		final NoteEntity note = noteEntityDao.find(noteID);
+		final Note note = noteEntityDao.find(noteID);
 		note.setDescription(description);
 		noteEntityDao.persist(note);
 		noteEntityEventSrc.fire(note);
@@ -54,7 +53,7 @@ public class NotesService {
 	
 	public void doCleanup(){
 		noteEntityDao.deleteAll();
-		authorEntityDao.deleteAll();
+		authorDao.deleteAll();
 	}
 	
 	

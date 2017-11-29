@@ -13,7 +13,7 @@ import com.workproject.simplewebapp.control.NotesService;
 
 @Named
 @javax.faces.view.ViewScoped
-public class NotingService implements Serializable {
+public class ListUpdateService implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
