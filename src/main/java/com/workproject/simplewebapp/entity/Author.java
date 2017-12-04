@@ -20,8 +20,8 @@ public class Author implements Serializable {
 	public Author(String authorName, String authorSurname, Long id,
 			List<Note> notes) {
 		super();
-		AuthorName = authorName;
-		AuthorSurname = authorSurname;
+		this.name = authorName;
+		this.surname = authorSurname;
 		this.id = id;
 		this.notes = notes;
 	}
@@ -33,12 +33,12 @@ public class Author implements Serializable {
 	
 	@Column(name = "authorname")
 	@XmlElement(name= "name")
-	private String AuthorName;
+	private String name;
 	
 	
 	@Column(name = "authorsurname")
 	@XmlElement(name= "surname")
-	private String AuthorSurname;
+	private String surname;
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -58,19 +58,19 @@ public class Author implements Serializable {
 	}
 
 	public String getAuthorName() {
-		return AuthorName;
+		return name;
 	}
 
 	public void setAuthorName(String authorName) {
-		AuthorName = authorName;
+		name = authorName;
 	}
 
 	public String getAuthorSurname() {
-		return AuthorSurname;
+		return surname;
 	}
 
 	public void setAuthorSurname(String authorSurname) {
-		AuthorSurname = authorSurname;
+		surname = authorSurname;
 	}
 	
 }
